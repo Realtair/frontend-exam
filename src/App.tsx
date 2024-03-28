@@ -3,7 +3,7 @@ import "./App.css";
 
 type Item = {
   title: string;
-  description: string;
+  description?: string;
 };
 type Items = Array<Item>;
 
