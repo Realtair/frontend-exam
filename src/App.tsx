@@ -1,56 +1,77 @@
 import { ChangeEvent, useState } from "react";
 import "./App.css";
 
-type Items = Array<string>;
+type Item = {
+  title: string;
+  description: string;
+};
+type Items = Array<Item>;
 
 function App() {
-  const [newItem, setNewItem] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [items, setItems] = useState<Items>([]);
   const [addedItems, setAddedItems] = useState<Items>([]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewItem(e.target.value);
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(e.target.value);
   };
 
   const addItem = () => {
-    if (newItem.trim() !== "") {
+    if (title.trim() !== "") {
+      const newItem = {
+        title,
+        description,
+      };
       setItems([...items, newItem]);
-      setNewItem("");
+      setTitle("");
+      setDescription("");
     }
   };
 
-  const addToList = (item: string) => {
+  const addToList = (item: Item) => {
     setAddedItems([...addedItems, item]);
   };
 
   return (
-    <div className="App">
+    <div className="column">
       <div className="add-item">
         <input
           type="text"
-          placeholder="Add item..."
-          value={newItem}
-          onChange={handleChange}
+          placeholder="Title of item"
+          value={title}
+          onChange={handleTitleChange}
+        />
+        <textarea
+          placeholder="Descripion of item"
+          value={description}
+          onChange={handleDescriptionChange}
         />
         <button onClick={addItem}>Add</button>
       </div>
-      <div className="lists">
-        <div className="item-list">
-          <h2>Items to Add:</h2>
-          <ul>
+      <div className="horizontal gap-sm">
+        <div className="y-center">
+          <h3>Items to Add:</h3>
+          <ul className="vertical gap-sm">
             {items.map((item, index) => (
-              <li key={index}>
-                {item}
+              <li className="card" key={index}>
+                <h3>{item.title}</h3>
                 <button onClick={() => addToList(item)}>Add to List</button>
               </li>
             ))}
           </ul>
         </div>
         <div className="added-item-list">
-          <h2>Added Items:</h2>
-          <ul>
+          <h3>Added Items:</h3>
+          <ul className="vertical gap-sm">
             {addedItems.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li className="card" key={index}>
+                <h3>{item.title}</h3>
+                <p> {item.description}</p>
+              </li>
             ))}
           </ul>
         </div>

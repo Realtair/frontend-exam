@@ -33,8 +33,37 @@
   }
 }
 
+.gap-sm{
+  gap: 8px
+}
+
+.horizontal {
+  display: flex;
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.y-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .card {
-  padding: 2em;
+  padding: 8px;
+  border: 1px solid #C7C7C7;
+  border-radius: 6px;
+  /* box-shadow: 0 1px 3px rgb(50 50 93 / 15%), 0 1px 0 rgb(0 0 0 / 2%); */
+  /* border: 5px solid red; */
+  list-style-type: none;
+}
+
+.add-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
 }
 
 .read-the-docs {
